@@ -1,0 +1,24 @@
+query Input {
+  cart {
+    lines {
+      cost {
+        amountPerQuantity {
+          amount
+        }
+      }
+      quantity
+      merchandise {
+        __typename
+        ...on ProductVariant {
+          id
+          product{
+            hasAnyTag(tags: ["sale"])
+            custom_price: metafield(namespace:"custom", key:"straight_price") {
+              value
+            }
+          }
+        }
+      }
+    }
+  }
+}
